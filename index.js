@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 5000;
 // ✅ Allow requests from your React frontend
 app.use(
   cors({
-    origin: "http://localhost:5173", // React app origin
+    origin: "https://smit-final-hackathon-jnd.vercel.app/", // React app origin
     credentials: true,
   })
 );
