@@ -103,9 +103,11 @@ export const login = async (req, res) => {
       .status(200)
       .cookie("token", token, {
         httpOnly: true,
-        sameSite: "strict",
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+        sameSite: "none", // ✅ allow cross-domain cookies
+        secure: true, // ✅ required for HTTPS (Render + Vercel)
+        maxAge: 7 * 24 * 60 * 60 * 1000,
       })
+
       .json({
         success: true,
         message: `Welcome back, ${user.fullName}`,
@@ -134,8 +136,9 @@ export const logout = async (req, res) => {
       .status(200)
       .cookie("token", "", {
         httpOnly: true,
-        sameSite: "strict",
-        expires: new Date(0), // expire immediately
+        sameSite: "none",
+        secure: true,
+        expires: new Date(0),
       })
       .json({
         success: true,
